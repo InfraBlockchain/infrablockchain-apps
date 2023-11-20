@@ -6,6 +6,7 @@ import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import React, { useMemo } from 'react';
 
 import { createWsEndpoints } from '@polkadot/apps-config';
+import { chainsInfraBlockchainPNG } from '@polkadot/apps-config/ui/logos/chains';
 import { externalEmptySVG } from '@polkadot/apps-config/ui/logos/external';
 import { useApi } from '@polkadot/react-hooks';
 
@@ -26,7 +27,7 @@ function ChainImg ({ className = '', isInline, logo, onClick, withoutHl }: Props
   const { apiEndpoint } = useApi();
   const [isEmpty, img, isFa] = useMemo((): [boolean, unknown, boolean] => {
     const endpoint = endpoints.find((o) => o.info === logo);
-    const found = endpoint?.ui.logo || logo || apiEndpoint?.ui.logo;
+    const found = endpoint?.ui.logo || logo || apiEndpoint?.ui.logo || chainsInfraBlockchainPNG;
     const imgBase = found || externalEmptySVG;
     const [isFa, img] = !imgBase || imgBase === 'empty' || !(imgBase.startsWith('data:') || imgBase.startsWith('fa;'))
       ? [false, externalEmptySVG]

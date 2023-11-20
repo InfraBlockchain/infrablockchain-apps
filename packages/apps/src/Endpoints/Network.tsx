@@ -5,6 +5,7 @@ import type { Network } from './types.js';
 
 import React, { useCallback, useMemo } from 'react';
 
+import { chainsInfraBlockchainPNG } from '@polkadot/apps-config/ui/logos/chains';
 import { ChainImg, styled } from '@polkadot/react-components';
 
 import { useTranslation } from '../translate.js';
@@ -48,7 +49,7 @@ function NetworkDisplay ({ apiUrl, className = '', setApiUrl, value: { isChild, 
         <ChainImg
           className='endpointIcon'
           isInline
-          logo={ui.logo || 'empty'}
+          logo={ui.logo || chainsInfraBlockchainPNG}
           withoutHl
         />
         <div className='endpointValue'>
