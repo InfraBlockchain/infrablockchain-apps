@@ -1,4 +1,4 @@
-// Copyright 2017-2023 @polkadot/page-accounts authors & contributors
+// Copyright 2017-2023 @polkadot/app-accounts authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 /// <reference types="@polkadot/dev-test/globals.d.ts" />
@@ -454,7 +454,7 @@ describe.skip('Accounts page', () => {
     describe('when genesis hash set', () => {
       beforeEach(async () => {
         accountsPage.renderAccountsWithDefaultAddresses(
-          anAccountWithInfoAndMeta({ flags: { isDevelopment: true } as AddressFlags }, { genesisHash: 'someHash', name: 'charlie' })
+          anAccountWithInfoAndMeta({ flags: { isDevelopment: true } as AddressFlags }, { genesisHash: '0x1234', name: 'charlie' })
         );
         accountRows = await accountsPage.getAccountRows();
       });

@@ -5,7 +5,6 @@ import type { Network } from './types.js';
 
 import React, { useCallback, useMemo } from 'react';
 
-import { chainsInfraBlockchainPNG } from '@polkadot/apps-config/ui/logos/chains';
 import { ChainImg, styled } from '@polkadot/react-components';
 
 import { useTranslation } from '../translate.js';
@@ -49,7 +48,7 @@ function NetworkDisplay ({ apiUrl, className = '', setApiUrl, value: { isChild, 
         <ChainImg
           className='endpointIcon'
           isInline
-          logo={ui.logo || chainsInfraBlockchainPNG}
+          logo={ui.logo || 'empty'}
           withoutHl
         />
         <div className='endpointValue'>
@@ -57,12 +56,12 @@ function NetworkDisplay ({ apiUrl, className = '', setApiUrl, value: { isChild, 
           {isSelected && (isRelay || !!paraId) && (
             <div className='endpointExtra'>
               {isRelay
-                ? t<string>('Relay chain')
+                ? t('Relay chain')
                 : paraId && paraId < 1000
-                  ? t<string>('{{relay}} System', { replace: { relay } })
+                  ? t('{{relay}} System', { replace: { relay } })
                   : paraId && paraId < 2000
-                    ? t<string>('{{relay}} Common', { replace: { relay } })
-                    : t<string>('{{relay}} Parachain', { replace: { relay } })
+                    ? t('{{relay}} Common', { replace: { relay } })
+                    : t('{{relay}} Parachain', { replace: { relay } })
               }
             </div>
           )}

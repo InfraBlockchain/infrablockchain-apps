@@ -4,8 +4,8 @@
 import type { EndpointOption } from './types.js';
 
 import { KUSAMA_GENESIS } from '../api/constants.js';
-import { chainsAbandPNG, chainsAltairSVG, chainsAmplitudeSVG, chainsDorafactoryPNG, chainsGenshiroSVG, chainsGmJPEG, chainsKaruraSVG, chainsKicoPNG, chainsKintsugiPNG, chainsKusamaSVG, chainsListenPNG, chainsMangataPNG, chainsRiodefiPNG, chainsShidenPNG, chainsTinkerPNG, chainsTuringPNG, chainsUnorthodoxPNG } from '../ui/logos/chains/index.js';
-import { nodesApronPNG, nodesAresMarsPNG, nodesBajunPNG, nodesBasiliskPNG, nodesBifrostSVG, nodesBitcountryPNG, nodesBridgeHubBlackSVG, nodesCalamariPNG, nodesCrabSVG, nodesDatahighwayPNG, nodesEncointerBlueSVG, nodesImbuePNG, nodesIntegriteeSVG, nodesIpciSVG, nodesKabochaSVG, nodesKhalaSVG, nodesKrestPNG, nodesLitmusPNG, nodesLoomNetworkPNG, nodesMoonriverSVG, nodesParallelSVG, nodesPicassoPNG, nodesPichiuPNG, nodesPolkasmithSVG, nodesQuartzPNG, nodesRobonomicsSVG, nodesSakuraSVG, nodesShadowSVG, nodesSnowPNG, nodesSoraSubstrateSVG, nodesStatemineSVG, nodesSubgameSVG, nodesSubsocialXSVG, nodesTrustbasePNG, nodesZeroSVG } from '../ui/logos/nodes/index.js';
+import { chainsAbandPNG, chainsAcurastPNG, chainsAltairSVG, chainsAmplitudeSVG, chainsDorafactoryPNG, chainsGenshiroSVG, chainsGmJPEG, chainsKaruraSVG, chainsKicoPNG, chainsKintsugiPNG, chainsKreivoSVG, chainsKusamaSVG, chainsListenPNG, chainsMangataPNG, chainsQpnPNG, chainsRiodefiPNG, chainsShidenPNG, chainsTinkerPNG, chainsTuringPNG, chainsUnorthodoxPNG } from '../ui/logos/chains/index.js';
+import { nodesApronPNG, nodesAresMarsPNG, nodesAssetHubSVG, nodesBajunPNG, nodesBasiliskPNG, nodesBifrostSVG, nodesBitcountryPNG, nodesBridgeHubBlackSVG, nodesCalamariPNG, nodesCrabSVG, nodesDatahighwayPNG, nodesEncointerBlueSVG, nodesImbuePNG, nodesIntegriteeSVG, nodesIpciSVG, nodesKabochaSVG, nodesKhalaSVG, nodesKrestPNG, nodesLitmusPNG, nodesLoomNetworkPNG, nodesMoonriverSVG, nodesParallelSVG, nodesPicassoPNG, nodesPichiuPNG, nodesPolkasmithSVG, nodesQuartzPNG, nodesRobonomicsSVG, nodesSakuraSVG, nodesShadowSVG, nodesSnowPNG, nodesSoraSubstrateSVG, nodesSubgameSVG, nodesSubsocialXSVG, nodesT1rnPNG, nodesTrustbasePNG, nodesZeroSVG } from '../ui/logos/nodes/index.js';
 import { getTeleports } from './util.js';
 
 // The available endpoints that will show in the dropdown. For the most part (with the exception of
@@ -27,6 +27,19 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     ui: {
       color: '#7358ff',
       logo: chainsAbandPNG
+    }
+  },
+  {
+    homepage: 'https://acurast.com',
+    info: 'acurast',
+    paraId: 2239,
+    providers: {
+      Acurast: 'wss://acurast-canarynet-ws.prod.gke.papers.tech'
+    },
+    text: 'Acurast Canary',
+    ui: {
+      color: '#000000',
+      logo: chainsAcurastPNG
     }
   },
   {
@@ -94,25 +107,13 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     providers: {
       Dwellir: 'wss://bifrost-rpc.dwellir.com',
       Liebi: 'wss://bifrost-rpc.liebi.com/ws',
+      LiebiUS: 'wss://us.bifrost-rpc.liebi.com/ws',
       OnFinality: 'wss://bifrost-parachain.api.onfinality.io/public-ws'
     },
     text: 'Bifrost',
     ui: {
       color: '#5a25f0',
       logo: nodesBifrostSVG
-    }
-  },
-  {
-    homepage: 'https://bit.country/?ref=polkadotjs',
-    info: 'bitcountryPioneer',
-    paraId: 2096,
-    providers: {
-      OnFinality: 'wss://pioneer.api.onfinality.io/public-ws'
-    },
-    text: 'Bit.Country Pioneer',
-    ui: {
-      color: '#000000',
-      logo: nodesBitcountryPNG
     }
   },
   {
@@ -133,11 +134,11 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'crab',
     paraId: 2105,
     providers: {
-      'Darwinia Network': 'wss://crab-rpc.darwinia.network/',
-      Dwellir: 'wss://darwiniacrab-rpc.dwellir.com',
-      OnFinality: 'wss://crab.api.onfinality.io/public-ws'
+      Darwinia: 'wss://crab-rpc.darwinia.network/',
+      'Darwinia Community': 'wss://crab-rpc.darwiniacommunitydao.xyz',
+      Dwellir: 'wss://darwiniacrab-rpc.dwellir.com'
     },
-    text: 'Crab2',
+    text: 'Crab',
     ui: {
       color: '#512DBC',
       logo: nodesCrabSVG
@@ -186,7 +187,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'dorafactory',
     paraId: 2115,
     providers: {
-      DORA: 'wss://kusama.dorafactory.org'
+      // DORA: 'wss://kusama.dorafactory.org' // https://github.com/polkadot-js/apps/issues/9748
     },
     text: 'Dora Factory',
     ui: {
@@ -229,8 +230,8 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
       // GMorDieDAO: 'wss://kusama.gmordie.com', // https://github.com/polkadot-js/apps/issues/8457
       // 'GM Intern': 'wss://intern.gmordie.com', // https://github.com/polkadot-js/apps/issues/9381
       // TerraBioDAO: 'wss://ws-node-gm.terrabiodao.org', // https://github.com/polkadot-js/apps/issues/8867
-      Leemo: 'wss://leemo.gmordie.com',
-      'bLd Nodes': 'wss://ws.gm.bldnodes.org',
+      // Leemo: 'wss://leemo.gmordie.com', // https://github.com/polkadot-js/apps/issues/9712
+      // 'bLd Nodes': 'wss://ws.gm.bldnodes.org', // https://github.com/polkadot-js/apps/issues/9947
       'light client': 'light://substrate-connect/kusama/gm'
     },
     text: 'GM',
@@ -244,7 +245,8 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'imbue',
     paraId: 2121,
     providers: {
-      // 'Imbue Network': 'wss://imbue-kusama.imbue.network' // https://github.com/polkadot-js/apps/issues/9300
+      'Imbue Network 0': 'wss://kusama.imbuenetwork.com'
+      // 'Imbue Network 1': 'wss://collator.production.imbue.network' // https://github.com/polkadot-js/apps/issues/9848
     },
     text: 'Imbue Network',
     ui: {
@@ -262,7 +264,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Integritee Network',
     ui: {
-      color: '#658ea9',
+      color: '#2e154b',
       logo: nodesIntegriteeSVG
     }
   },
@@ -272,7 +274,8 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     paraId: 2125,
     providers: {
       // 'InvArch Team': 'wss://tinker.invarch.network', // https://github.com/polkadot-js/apps/issues/8623
-      OnFinality: 'wss://invarch-tinkernet.api.onfinality.io/public-ws',
+      Dwellir: 'wss://tinkernet-rpc.dwellir.com',
+      // OnFinality: 'wss://invarch-tinkernet.api.onfinality.io/public-ws', // https://github.com/polkadot-js/apps/issues/9955
       'light client': 'light://substrate-connect/kusama/tinkernet'
     },
     text: 'InvArch Tinkernet',
@@ -303,7 +306,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
       'Acala Foundation 1': 'wss://karura-rpc-1.aca-api.network',
       'Acala Foundation 2': 'wss://karura-rpc-2.aca-api.network/ws',
       'Acala Foundation 3': 'wss://karura-rpc-3.aca-api.network/ws',
-      Dwellir: 'wss://karura-rpc.dwellir.com',
+      // Dwellir: 'wss://karura-rpc.dwellir.com', // https://github.com/polkadot-js/apps/issues/9861
       OnFinality: 'wss://karura.api.onfinality.io/public-ws'
       // 'Polkawallet 0': 'wss://karura.polkawallet.io' // https://github.com/polkadot-js/apps/issues/9383
     },
@@ -360,7 +363,9 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'kintsugi',
     paraId: 2092,
     providers: {
+      Dwellir: 'wss://kintsugi-rpc.dwellir.com',
       'Kintsugi Labs': 'wss://api-kusama.interlay.io/parachain',
+      // LuckyFriday: 'wss://rpc-kintsugi.luckyfriday.io/', // https://github.com/polkadot-js/apps/issues/9947
       OnFinality: 'wss://kintsugi.api.onfinality.io/public-ws'
     },
     text: 'Kintsugi BTC',
@@ -384,10 +389,26 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
+    homepage: 'https://virto.network/',
+    info: 'kreivo',
+    paraId: 2281,
+    providers: {
+      Virto: 'wss://kreivo.io/'
+    },
+    text: 'Kreivo - By Virto',
+    ui: {
+      color: '#294940',
+      logo: chainsKreivoSVG
+    }
+  },
+  {
     homepage: 'https://krest.peaq.network/',
     info: 'krest',
     paraId: 2241,
-    providers: {},
+    providers: {
+      Krest: 'wss://wss-krest.peaq.network/',
+      UnitedBloc: 'wss://krest.unitedbloc.com/'
+    },
     text: 'Krest',
     ui: {
       logo: nodesKrestPNG
@@ -465,8 +486,8 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     paraId: 2023,
     providers: {
       Blast: 'wss://moonriver.public.blastapi.io',
+      Dwellir: 'wss://moonriver-rpc.dwellir.com',
       'Moonbeam Foundation': 'wss://wss.api.moonriver.moonbeam.network',
-      OnFinality: 'wss://moonriver.api.onfinality.io/public-ws',
       UnitedBloc: 'wss://moonriver.unitedbloc.com'
     },
     text: 'Moonriver',
@@ -480,7 +501,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'heiko',
     paraId: 2085,
     providers: {
-      OnFinality: 'wss://parallel-heiko.api.onfinality.io/public-ws',
+      // OnFinality: 'wss://parallel-heiko.api.onfinality.io/public-ws', // https://github.com/polkadot-js/apps/issues/9964
       Parallel: 'wss://heiko-rpc.parallel.fi'
     },
     text: 'Parallel Heiko',
@@ -506,7 +527,9 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'picasso',
     paraId: 2087,
     providers: {
-      Composable: 'wss://rpc.composablenodes.tech'
+      Composable: 'wss://rpc.composablenodes.tech',
+      Dwellir: 'wss://picasso-rpc.dwellir.com'
+      // LuckyFriday: 'wss://rpc-picasso.luckyfriday.io' // https://github.com/polkadot-js/apps/issues/9947
     },
     text: 'Picasso',
     ui: {
@@ -519,12 +542,26 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'pichiu',
     paraId: 2102,
     providers: {
-      'Kylin Network': 'wss://kusama.kylin-node.co.uk'
+      // 'Kylin Network': 'wss://kusama.kylin-node.co.uk' // https://github.com/polkadot-js/apps/issues/9560
     },
     text: 'Pichiu',
     ui: {
       color: '#ed007e',
       logo: nodesPichiuPNG
+    }
+  },
+  {
+    homepage: 'https://pioneer.bit.country/?ref=polkadotjs',
+    info: 'pioneer',
+    paraId: 2096,
+    providers: {
+      MetaverseNetwork: 'wss://pioneer-rpc-3.bit.country/wss'
+      // OnFinality: 'wss://pioneer.api.onfinality.io/public-ws' // https://github.com/polkadot-js/apps/issues/9955
+    },
+    text: 'Pioneer',
+    ui: {
+      color: '#000000',
+      logo: nodesBitcountryPNG
     }
   },
   {
@@ -541,12 +578,25 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
+    info: 'qpn',
+    paraId: 2274,
+    providers: {
+      FerrumNetwork: 'wss://qpn.svcs.ferrumnetwork.io/'
+    },
+    text: 'Quantum Portal Network',
+    ui: {
+      color: '#b37700',
+      logo: chainsQpnPNG
+    }
+  },
+  {
     homepage: 'https://unique.network/',
     info: 'quartz',
     paraId: 2095,
     providers: {
+      Dwellir: 'wss://quartz-rpc.dwellir.com',
+      // OnFinality: 'wss://quartz.api.onfinality.io/public-ws', // https://github.com/polkadot-js/apps/issues/9972
       'Geo Load Balancer': 'wss://ws-quartz.unique.network',
-      OnFinality: 'wss://quartz.api.onfinality.io/public-ws',
       'Unique America': 'wss://us-ws-quartz.unique.network',
       'Unique Asia': 'wss://asia-ws-quartz.unique.network',
       'Unique Europe': 'wss://eu-ws-quartz.unique.network'
@@ -576,8 +626,8 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     paraId: 2048,
     providers: {
       Airalab: 'wss://kusama.rpc.robonomics.network/',
-      Leemo: 'wss://robonomics.leemo.me',
-      OnFinality: 'wss://robonomics.api.onfinality.io/public-ws',
+      // Leemo: 'wss://robonomics.leemo.me', // https://github.com/polkadot-js/apps/issues/9817
+      // OnFinality: 'wss://robonomics.api.onfinality.io/public-ws', // https://github.com/polkadot-js/apps/issues/9824
       Samsara: 'wss://robonomics.0xsamsara.com'
     },
     text: 'Robonomics',
@@ -593,8 +643,8 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     paraId: 2240,
     providers: {
       Airalab: 'wss://kusama.rpc.robonomics.network/',
-      Leemo: 'wss://robonomics.leemo.me',
-      OnFinality: 'wss://robonomics.api.onfinality.io/public-ws',
+      // Leemo: 'wss://robonomics.leemo.me', // https://github.com/polkadot-js/apps/issues/9817
+      // OnFinality: 'wss://robonomics.api.onfinality.io/public-ws', // https://github.com/polkadot-js/apps/issues/9824
       Samsara: 'wss://robonomics.0xsamsara.com'
     },
     text: 'Robonomics 2',
@@ -622,10 +672,10 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'shiden',
     paraId: 2007,
     providers: {
+      Astar: 'wss://rpc.shiden.astar.network',
       Blast: 'wss://shiden.public.blastapi.io',
       Dwellir: 'wss://shiden-rpc.dwellir.com',
       OnFinality: 'wss://shiden.api.onfinality.io/public-ws',
-      StakeTechnologies: 'wss://rpc.shiden.astar.network',
       'light client': 'light://substrate-connect/kusama/shiden'
     },
     text: 'Shiden',
@@ -713,6 +763,19 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
+    homepage: 'https://www.t3rn.io/',
+    info: 't1rn',
+    paraId: 3334,
+    providers: {
+      t3rn: 'wss://rpc.t1rn.io'
+    },
+    text: 't1rn',
+    ui: {
+      color: '#131532',
+      logo: nodesT1rnPNG
+    }
+  },
+  {
     homepage: 'https://www.datahighway.com/',
     info: 'tanganika',
     paraId: 2116,
@@ -768,23 +831,42 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
 
 export const prodParasKusamaCommon: EndpointOption[] = [
   {
-    info: 'statemine',
+    info: 'KusamaAssetHub',
     paraId: 1000,
     providers: {
       Dwellir: 'wss://statemine-rpc.dwellir.com',
       'Dwellir Tunisia': 'wss://statemine-rpc-tn.dwellir.com',
       'IBP-GeoDNS1': 'wss://sys.ibp.network/statemine',
       'IBP-GeoDNS2': 'wss://sys.dotters.network/statemine',
-      LuckyFriday: 'wss://rpc-statemine.luckyfriday.io',
-      OnFinality: 'wss://statemine.api.onfinality.io/public-ws',
-      Parity: 'wss://statemine-rpc.polkadot.io',
-      RadiumBlock: 'wss://statemine.public.curie.radiumblock.co/ws'
+      LuckyFriday: 'wss://rpc-asset-hub-kusama.luckyfriday.io',
+      // OnFinality: 'wss://statemine.api.onfinality.io/public-ws',
+      Parity: 'wss://kusama-asset-hub-rpc.polkadot.io',
+      RadiumBlock: 'wss://statemine.public.curie.radiumblock.co/ws',
+      Stakeworld: 'wss://ksm-rpc.stakeworld.io/assethub'
     },
     teleport: [-1],
-    text: 'Statemine',
+    text: 'AssetHub',
     ui: {
       color: '#113911',
-      logo: nodesStatemineSVG
+      logo: nodesAssetHubSVG
+    }
+  },
+  {
+    info: 'kusamaBridgeHub',
+    paraId: 1002,
+    providers: {
+      Dwellir: 'wss://kusama-bridge-hub-rpc.dwellir.com',
+      'Dwellir Tunisia': 'wss://kusama-bridge-hub-rpc-tn.dwellir.com',
+      'IBP-GeoDNS1': 'wss://sys.ibp.network/bridgehub-kusama',
+      'IBP-GeoDNS2': 'wss://sys.dotters.network/bridgehub-kusama',
+      // LuckyFriday: 'wss://rpc-bridge-hub-kusama.luckyfriday.io', // https://github.com/polkadot-js/apps/issues/9947
+      // OnFinality: 'wss://bridgehub-kusama.api.onfinality.io/public-ws',
+      Parity: 'wss://kusama-bridge-hub-rpc.polkadot.io',
+      Stakeworld: 'wss://ksm-rpc.stakeworld.io/bridgehub'
+    },
+    text: 'BridgeHub',
+    ui: {
+      logo: nodesBridgeHubBlackSVG
     }
   },
   {
@@ -795,26 +877,14 @@ export const prodParasKusamaCommon: EndpointOption[] = [
       'Encointer Association': 'wss://kusama.api.encointer.org',
       'IBP-GeoDNS1': 'wss://sys.ibp.network/encointer-kusama',
       'IBP-GeoDNS2': 'wss://sys.dotters.network/encointer-kusama',
-      OnFinality: 'wss://encointer.api.onfinality.io/public-ws'
+      // OnFinality: 'wss://encointer.api.onfinality.io/public-ws', // https://github.com/polkadot-js/apps/issues/9986
+      Stakeworld: 'wss://ksm-rpc.stakeworld.io/encointer'
     },
-    teleport: [-1],
+    teleport: [], // teleport is temporarily disabled until xcm V3 is supported
     text: 'Encointer Network',
     ui: {
       color: '#0000cc',
       logo: nodesEncointerBlueSVG
-    }
-  },
-  {
-    info: 'kusamaBridgeHub',
-    paraId: 1002,
-    providers: {
-      'IBP-GeoDNS1': 'wss://sys.ibp.network/bridgehub-kusama',
-      'IBP-GeoDNS2': 'wss://sys.dotters.network/bridgehub-kusama',
-      Parity: 'wss://kusama-bridge-hub-rpc.polkadot.io'
-    },
-    text: 'BridgeHub',
-    ui: {
-      logo: nodesBridgeHubBlackSVG
     }
   }
 ];
@@ -830,14 +900,13 @@ export const prodRelayKusama: EndpointOption = {
   providers: {
     // 'Geometry Labs': 'wss://kusama.geometry.io/websockets', // https://github.com/polkadot-js/apps/pull/6746
     'Automata 1RPC': 'wss://1rpc.io/ksm',
-    BlockOps: 'wss://kusama-public-rpc.blockops.network/ws',
+    // Blockops: 'wss://kusama-public-rpc.blockops.network/ws', // https://github.com/polkadot-js/apps/issues/9840
     Dwellir: 'wss://kusama-rpc.dwellir.com',
     'Dwellir Tunisia': 'wss://kusama-rpc-tn.dwellir.com',
     'IBP-GeoDNS1': 'wss://rpc.ibp.network/kusama',
     'IBP-GeoDNS2': 'wss://rpc.dotters.network/kusama',
     LuckyFriday: 'wss://rpc-kusama.luckyfriday.io',
     OnFinality: 'wss://kusama.api.onfinality.io/public-ws',
-    Parity: 'wss://kusama-rpc.polkadot.io',
     RadiumBlock: 'wss://kusama.public.curie.radiumblock.co/ws',
     Stakeworld: 'wss://ksm-rpc.stakeworld.io',
     'light client': 'light://substrate-connect/kusama'
@@ -846,6 +915,7 @@ export const prodRelayKusama: EndpointOption = {
   text: 'Kusama',
   ui: {
     color: '#000000',
+    identityIcon: 'polkadot',
     logo: chainsKusamaSVG
   }
 };

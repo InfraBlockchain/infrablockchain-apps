@@ -5,7 +5,6 @@ import type { BN } from '@polkadot/util';
 
 import React, { useMemo } from 'react';
 
-import { chainsInfraBlockchainPNG } from '@polkadot/apps-config/ui/logos/chains';
 import { useParaEndpoints } from '@polkadot/react-hooks';
 
 import ChainImg from './ChainImg.js';
@@ -35,7 +34,7 @@ function ParaLink ({ className, id }: Props): React.ReactElement<Props> | null {
     <StyledDiv className={className}>
       <ChainImg
         isInline
-        logo={ui.logo || chainsInfraBlockchainPNG}
+        logo={ui.logo || 'empty'}
         withoutHl
       />
       {links.length

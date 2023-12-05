@@ -49,19 +49,28 @@ describe('urls are sorted', (): void => {
     return !hasDevelopment;
   });
 
-  filtered.forEach(({ isHeader, text, textBy }, index): void => {
+  filtered.forEach(({ isHeader, paraId, text, textBy }, index): void => {
     if (isHeader) {
       lastHeader = text as string;
     } else {
       it(`${lastHeader}:: ${text as string}:: ${textBy}`, (): void => {
+        const item = filtered[index - 1];
+
         assert((
-          filtered[index - 1].isHeader ||
-          filtered[index - 1].linked ||
-          (isNumber(filtered[index - 1].paraId) && (filtered[index - 1].paraId as number) < 2000) ||
-          filtered[index - 1].text === '' ||
-          text === filtered[index - 1].text ||
-          (text as string).localeCompare(filtered[index - 1].text as string) === 1
-        ), `${lastHeader}:: ${text as string} needs to be before ${filtered[index - 1].text as string}`);
+          item.isHeader ||
+          item.linked ||
+          (
+            isNumber(item.paraId) &&
+            (
+              item.paraId < 2000
+                ? isNumber(paraId) && paraId >= 2000
+                : false
+            )
+          ) ||
+          item.text === '' ||
+          text === item.text ||
+          (text as string).localeCompare(item.text as string) === 1
+        ), `${lastHeader}:: ${text as string} needs to be before ${item.text as string}`);
       });
     }
   });
