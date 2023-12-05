@@ -6,18 +6,19 @@ import type { ProviderInterface } from '@polkadot/rpc-provider/types';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ApiPromise, WsProvider } from '@polkadot/api';
+import { typesBundle } from '@polkadot/apps-config';
 import { arrayShuffle, isString } from '@polkadot/util';
 
 import { createNamedHook } from './createNamedHook.js';
 import { useIsMountedRef } from './useIsMountedRef.js';
 
-function disconnect (provider: ProviderInterface | null): null {
-  provider && provider.disconnect().catch(console.error);
+function disconnect(provider: ProviderInterface | null): null {
+  provider?.disconnect().catch(console.error);
 
   return null;
 }
 
-function useApiUrlImpl (url?: null | string | string[]): ApiPromise | null {
+function useApiUrlImpl(url?: null | string | string[]): ApiPromise | null {
   const providerRef = useRef<ProviderInterface | null>(null);
   const mountedRef = useIsMountedRef();
   const [state, setState] = useState<ApiPromise | null>(null);
@@ -46,21 +47,22 @@ function useApiUrlImpl (url?: null | string | string[]): ApiPromise | null {
           provider: (providerRef.current = new WsProvider(urls)),
           types: {
             SystemTokenId: {
-                paraId: "Compact<u32>",
-                palletId: "Compact<u32>",
-                assetId: "Compact<u32>"
+              paraId: "Compact<u32>",
+              palletId: "Compact<u32>",
+              assetId: "Compact<u32>"
             },
           },
           signedExtensions: {
             ChargeSystemToken: {
-                extrinsic: {
-                    tip: 'Compact<u128>',
-                    systemTokenId: 'Option<SystemTokenId>',
-                    voteCandidate: 'Option<AccountId32>',
-                },
-                payload: {}
+              extrinsic: {
+                tip: 'Compact<u128>',
+                systemTokenId: 'Option<SystemTokenId>',
+                voteCandidate: 'Option<AccountId32>',
+              },
+              payload: {}
             }
-          }    
+          },
+          typesBundle
         })
         .then((api) => mountedRef.current && setState(api))
         .catch(console.error);

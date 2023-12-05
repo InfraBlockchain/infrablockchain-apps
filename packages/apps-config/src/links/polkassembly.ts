@@ -16,6 +16,8 @@ export const PolkassemblyIo: ExternalDef = {
     Calamari: 'calamari',
     Centrifuge: 'centrifuge',
     'Centrifuge Mainnet': 'centrifuge',
+    'Cere Mainnet Beta': 'cere',
+    Collectives: 'collectives',
     'Equilibrium parachain': 'equilibrium',
     'Hashed Network': 'hashed',
     HydraDX: 'hydradx',
@@ -39,6 +41,7 @@ export const PolkassemblyIo: ExternalDef = {
   homepage: 'https://polkassembly.io/',
   isActive: true,
   paths: {
+    address: 'address',
     bounty: 'bounty',
     council: 'motion',
     democracyProposal: 'proposal',

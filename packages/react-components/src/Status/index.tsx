@@ -64,7 +64,8 @@ function signerIconName (status: QueueTxStatus): IconName {
   }
 }
 
-function renderStatus ({ account, action, id, message, removeItem, status }: QueueStatus): React.ReactNode {
+function renderStatus({ account, action, id, message, removeItem, status }: QueueStatus): React.ReactNode {
+  console.log(status);
   return (
     <div
       className={`item ${status}`}
@@ -189,7 +190,7 @@ const StyledDiv = styled.div`
   width: 4.5rem;
   z-index: 1001;
 
-  :hover {
+  &:hover {
     transform: scale(1);
     width: 23rem;
 

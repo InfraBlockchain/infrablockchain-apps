@@ -4,7 +4,7 @@
 import type { EndpointOption } from './types.js';
 
 import { chains3dpassSVG, chainsAcalaSVG, chainsAlephSVG, chainsBrainstormPNG, chainsCreditcoinTestPNG, chainsDebioSVG, chainsEquilibriumSVG, chainsFerrumPNG, chainsFragnovaPNG, chainsJurPNG, chainsKintsugiPNG, chainsLogionPNG, chainsMyriadPNG, chainsShidenPNG, chainsSkyekiwiPNG, chainsTanglePNG } from '../ui/logos/chains/index.js';
-import { nodesAjunaPNG, nodesArcticPNG, nodesAresGladiosSVG, nodesAutomataPNG, nodesBifrostSVG, nodesBitcountryPNG, nodesCereSVG, nodesCessPNG, nodesCloverSVG, nodesCrustMaxwellSVG, nodesCurioSVG, nodesDatahighwayPNG, nodesDockPNG, nodesDolphinSVG, nodesDotmogSVG, nodesEdgewareWhitePNG, nodesEncointerBlueSVG, nodesFantourPNG, nodesGalitalLogoPNG, nodesGamepowerSVG, nodesGeekSVG, nodesInterlaySVG, nodesIpsePNG, nodesJazPNG, nodesJupiterSVG, nodesKarmachainSVG, nodesKhalaSVG, nodesKiltPNG, nodesKlugPNG, nodesKylinPNG, nodesLaminarCircleSVG, nodesLitentryPNG, nodesMantaPNG, nodesMathSVG, nodesMinixPNG, nodesMoonbaseAlphaSVG, nodesMybankPNG, nodesNftmartPNG, nodesNodleSVG, nodesOpalLogoPNG, nodesOpportunityPNG, nodesPangoroSVG, nodesPhalaSVG, nodesPhoenixPNG, nodesPichiuPNG, nodesPolkadexSVG, nodesPolkafoundrySVG, nodesPolymeshSVG, nodesPontemSVG, nodesPrismPNG, nodesRealisPNG, nodesRiochainSVG, nodesSherpaxPNG, nodesSoonsocialPNG, nodesSoraSubstrateSVG, nodesSubdaoPNG, nodesSubgameSVG, nodesSubspacePNG, nodesSubstrateHexagonSVG, nodesTernoaSVG, nodesThebifrostPNG, nodesUniartsPNG, nodesUniqueSVG, nodesUnitnetworkPNG, nodesWeb3gamesSVG, nodesZCloakSVG } from '../ui/logos/nodes/index.js';
+import { nodesAjunaPNG, nodesArcticPNG, nodesAresGladiosSVG, nodesAutomataPNG, nodesBifrostSVG, nodesBitcountryPNG, nodesCereSVG, nodesCessPNG, nodesCloverSVG, nodesCrustMaxwellSVG, nodesCurioSVG, nodesDatahighwayPNG, nodesDockPNG, nodesDolphinSVG, nodesDotmogSVG, nodesEdgewareWhitePNG, nodesEncointerBlueSVG, nodesFantourPNG, nodesGalitalLogoPNG, nodesGamepowerSVG, nodesGeekSVG, nodesInterlaySVG, nodesIpsePNG, nodesJazPNG, nodesJupiterSVG, nodesKarmachainSVG, nodesKhalaSVG, nodesKiltPNG, nodesKlugPNG, nodesKylinPNG, nodesLaminarCircleSVG, nodesLitentryPNG, nodesMantaPNG, nodesMathSVG, nodesMetaquityNetworkPNG, nodesMinixPNG, nodesMoonbaseAlphaSVG, nodesMybankPNG, nodesNftmartPNG, nodesNodleSVG, nodesOpalLogoPNG, nodesOpportunityPNG, nodesPangoroSVG, nodesPhalaSVG, nodesPhoenixPNG, nodesPichiuPNG, nodesPolkadexSVG, nodesPolkafoundrySVG, nodesPolymeshSVG, nodesPontemSVG, nodesPrismPNG, nodesRealisPNG, nodesRiochainSVG, nodesSherpaxPNG, nodesSoonsocialPNG, nodesSoraSubstrateSVG, nodesSubdaoPNG, nodesSubgameSVG, nodesSubspacePNG, nodesSubstrateHexagonSVG, nodesTernoaSVG, nodesThebifrostPNG, nodesUniartsPNG, nodesUniqueSVG, nodesUnitnetworkPNG, nodesWeb3gamesSVG, nodesZCloakSVG } from '../ui/logos/nodes/index.js';
 
 export * from './testingRelayRococo.js';
 export * from './testingRelayWestend.js';
@@ -44,6 +44,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     providers: {
       'Aleph Zero Foundation': 'wss://ws.test.azero.dev',
       Dwellir: 'wss://aleph-zero-testnet-rpc.dwellir.com'
+      // OnFinality: 'wss://aleph-zero.api.onfinality.io/public-ws'
     },
     text: 'Aleph Zero Testnet',
     ui: {
@@ -109,7 +110,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'edgeware',
     providers: {
-      JelliedOwl: 'wss://beresheet.jelliedowl.net'
+      // JelliedOwl: 'wss://beresheet.jelliedowl.net' // https://github.com/polkadot-js/apps/issues/9952
     },
     text: 'Beresheet',
     ui: {
@@ -127,20 +128,22 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
-    info: 'bitcountry',
+    info: 'thebifrost-testnet',
     providers: {
-      // 'Metaverse Foundation': 'wss://tewai-rpc.bit.country' // https://github.com/polkadot-js/apps/issues/9059
+      'Pilab #1': 'wss://public-01.testnet.bifrostnetwork.com/wss',
+      'Pilab #2': 'wss://public-02.testnet.bifrostnetwork.com/wss'
     },
-    text: 'Bit.Country - Metaverse Network',
+    text: 'Bifrost Testnet',
     ui: {
-      logo: nodesBitcountryPNG
+      color: '#FF474C',
+      logo: nodesThebifrostPNG
     }
   },
   {
     info: 'cere',
     providers: {
-      'Cere Network': 'wss://archive.testnet.cere.network/ws',
-      'Republic Crypto | Runtime': 'wss://testnet.cere-archive.republiccrypto-runtime.com:444'
+      // 'Cere Network': 'wss://archive.testnet.cere.network/ws' // https://github.com/polkadot-js/apps/issues/9712
+      // 'Republic Crypto | Runtime': 'wss://testnet.cere-archive.republiccrypto-runtime.com:444' // https://github.com/polkadot-js/apps/issues/9712
     },
     text: 'Cere Network Testnet',
     ui: {
@@ -207,7 +210,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     info: 'datahighway',
     isDisabled: true,
     providers: {
-      MXC: 'wss://spreehafen.datahighway.com'
+      // MXC: 'wss://spreehafen.datahighway.com' // https://github.com/polkadot-js/apps/issues/9601
     },
     text: 'Spreehafen',
     ui: {
@@ -293,7 +296,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'ferrum',
     providers: {
-      FerrumNetwork: 'wss://testnet.dev.svcs.ferrumnetwork.io'
+      // FerrumNetwork: 'wss://testnet.dev.svcs.ferrumnetwork.io' // https://github.com/polkadot-js/apps/issues/9748
     },
     text: 'Ferrum Testnet',
     ui: {
@@ -438,7 +441,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'karmachain',
     providers: {
-      Karmachain: 'wss://testnet.karmaco.in/testnet/ws'
+      Karmachain: 'wss://api3.karmaco.in'
     },
     text: 'Karmachain Testnet',
     ui: {
@@ -460,7 +463,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'kilt',
     providers: {
-      'KILT Protocol': 'wss://full-nodes.kilt.io:9944/'
+      // BOTLabs: 'wss://full-nodes.kilt.io:9944/' // https://github.com/polkadot-js/apps/issues/10033
     },
     text: 'KILT Mashnet',
     ui: {
@@ -470,7 +473,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'kilt',
     providers: {
-      'KILT Protocol': 'wss://peregrine.kilt.io/parachain-public-ws/'
+      BOTLabs: 'wss://peregrine.kilt.io/parachain-public-ws/'
     },
     text: 'KILT Peregrine',
     ui: {
@@ -566,6 +569,17 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
+    info: 'metaquity',
+    providers: {
+      // 'Metaquity Testnet': 'wss://rpc.testnet.metaquity.xyz' // https://github.com/polkadot-js/apps/issues/9955
+    },
+    text: 'Metaquity Network Testnet',
+    ui: {
+      color: '#4034AB',
+      logo: nodesMetaquityNetworkPNG
+    }
+  },
+  {
     info: 'minix',
     providers: {
       // Chainx: 'wss://minichain.coming.chat/ws' // https://github.com/polkadot-js/apps/issues/8132
@@ -580,8 +594,8 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     info: 'moonbaseAlpha',
     providers: {
       Blast: 'wss://moonbase-alpha.public.blastapi.io',
+      Dwellir: 'wss://moonbase-rpc.dwellir.com',
       'Moonbeam Foundation': 'wss://wss.api.moonbase.moonbeam.network',
-      OnFinality: 'wss://moonbeam-alpha.api.onfinality.io/public-ws',
       UnitedBloc: 'wss://moonbase.unitedbloc.com'
     },
     text: 'Moonbase Alpha',
@@ -666,6 +680,16 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
       'Phala Network': 'wss://poc5.phala.network/ws'
     },
     text: 'Phala (PoC 5)',
+    ui: {
+      logo: nodesPhalaSVG
+    }
+  },
+  {
+    info: 'phala',
+    providers: {
+      'Phala Network': 'wss://poc6.phala.network/ws'
+    },
+    text: 'Phala (PoC 6)',
     ui: {
       logo: nodesPhalaSVG
     }
@@ -760,7 +784,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'sherpax',
     providers: {
-      Chainx: 'wss://sherpax-testnet.chainx.org'
+      // Chainx: 'wss://sherpax-testnet.chainx.org' // https://github.com/polkadot-js/apps/issues/9672
     },
     text: 'Sherpax Testnet',
     ui: {
@@ -771,8 +795,8 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'shibuya',
     providers: {
-      Dwellir: 'wss://shibuya-rpc.dwellir.com',
-      StakeTechnologies: 'wss://rpc.shibuya.astar.network'
+      Astar: 'wss://rpc.shibuya.astar.network',
+      Dwellir: 'wss://shibuya-rpc.dwellir.com'
     },
     text: 'Shibuya',
     ui: {
@@ -861,6 +885,41 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
+    info: 'subspace-gemini-3f',
+    providers: {
+      Europe: 'wss://rpc-1.gemini-3f.subspace.network/ws',
+      US: 'wss://rpc-0.gemini-3f.subspace.network/ws'
+    },
+    text: 'Subspace Gemini 3f',
+    ui: {
+      color: '#562b8e',
+      logo: nodesSubspacePNG
+    }
+  },
+  {
+    info: 'subspace-gemini-3g',
+    providers: {
+      Europe: 'wss://rpc-1.gemini-3g.subspace.network/ws',
+      US: 'wss://rpc-0.gemini-3g.subspace.network/ws'
+    },
+    text: 'Subspace Gemini 3g',
+    ui: {
+      color: '#562b8e',
+      logo: nodesSubspacePNG
+    }
+  },
+  {
+    info: 'subspace-gemini-3g-nova',
+    providers: {
+      Subspace: 'wss://nova.gemini-3g.subspace.network/ws'
+    },
+    text: 'Subspace Gemini 3g Nova',
+    ui: {
+      color: '#562b8e',
+      logo: nodesSubspacePNG
+    }
+  },
+  {
     info: 'subspace',
     providers: {
       // 'Subspace Network': 'wss://test-rpc.subspace.network' // https://github.com/polkadot-js/apps/issues/8598
@@ -874,11 +933,11 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'tangle',
     providers: {
-      // Webb: 'wss://tangle-archive.webb.tools' // https://github.com/polkadot-js/apps/issues/9104
+      Webb: 'wss://rpc-archive.tangle.tools'
     },
-    text: 'Tangle Alpha',
+    text: 'Tangle',
     ui: {
-      color: '#0099ff',
+      color: '#7578fb',
       logo: chainsTanglePNG
     }
   },
@@ -895,7 +954,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'ternoa-testnet',
     providers: {
-      CapsuleCorp: 'wss://testnet.ternoa.com/'
+      // CapsuleCorp: 'wss://testnet.ternoa.com/' // https://github.com/polkadot-js/apps/issues/9515
     },
     text: 'Ternoa Testnet',
     ui: {
@@ -904,15 +963,13 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
-    info: 'thebifrost-testnet',
+    info: 'bitcountry',
     providers: {
-      'Pilab #1': 'wss://public-01.testnet.thebifrost.io/ws',
-      'Pilab #2': 'wss://public-02.testnet.thebifrost.io/ws'
+      // 'Metaverse Foundation': 'wss://tewai-rpc.bit.country' // https://github.com/polkadot-js/apps/issues/9059
     },
-    text: 'The Bifrost Testnet',
+    text: 'Tewai',
     ui: {
-      color: '#5a25f0',
-      logo: nodesThebifrostPNG
+      logo: nodesBitcountryPNG
     }
   },
   {
@@ -969,7 +1026,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'web3games',
     providers: {
-      'Web3Games Foundation': 'wss://devnet.web3games.org'
+      // 'Web3Games Foundation': 'wss://devnet.web3games.org' // https://github.com/polkadot-js/apps/issues/9947
     },
     text: 'Web3Games',
     ui: {
