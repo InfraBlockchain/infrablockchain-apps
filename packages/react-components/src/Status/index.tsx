@@ -64,7 +64,8 @@ function signerIconName (status: QueueTxStatus): IconName {
   }
 }
 
-function renderStatus ({ account, action, id, message, removeItem, status }: QueueStatus): React.ReactNode {
+function renderStatus({ account, action, id, message, removeItem, status }: QueueStatus): React.ReactNode {
+  console.log(status);
   return (
     <div
       className={`item ${status}`}
