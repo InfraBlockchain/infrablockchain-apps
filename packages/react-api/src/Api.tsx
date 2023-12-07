@@ -309,7 +309,7 @@ export function ApiCtxRoot ({ apiUrl, children, isElectron, store }: Props): Rea
         statics.api.on('disconnected', () => setIsApiConnected(false));
         statics.api.on('error', onError);
         statics.api.on('ready', (): void => {
-          const injectedPromise = web3Enable('polkadot-js/apps');
+          const injectedPromise = web3Enable('infrablockchain/apps');
 
           injectedPromise
             .then(setExtensions)
