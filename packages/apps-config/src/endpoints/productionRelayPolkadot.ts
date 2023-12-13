@@ -4,7 +4,7 @@
 import type { EndpointOption } from './types.js';
 
 import { POLKADOT_GENESIS } from '../api/constants.js';
-import { chainsAcalaSVG, chainsBitgreenPNG, chainsComposableFinancePNG, chainsEquilibriumSVG, chainsFrequencySVG, chainsGeminisPNG, chainsInvarchJPEG, chainsLogionPNG, chainsOakPNG, chainsOrigintrailPNG, chainsPeaqPNG, chainsPendulumSVG, chainsPolkadotCircleSVG, chainsSnakenetSVG, chainsTotemSVG, chainsWatrPNG } from '../ui/logos/chains/index.js';
+import { chainsAcalaSVG, chainsBitgreenPNG, chainsComposableFinancePNG, chainsEquilibriumSVG, chainsFrequencySVG, chainsGeminisPNG, chainsInfraBlockchainPNG, chainsInvarchJPEG, chainsLogionPNG, chainsOakPNG, chainsOrigintrailPNG, chainsPeaqPNG, chainsPendulumSVG, chainsPolkadotCircleSVG, chainsSnakenetSVG, chainsTotemSVG, chainsWatrPNG } from '../ui/logos/chains/index.js';
 import { nodesAjunaPNG, nodesAresOdysseySVG, nodesAssetHubSVG, nodesAstarPNG, nodesAventusSVG, nodesBifrostSVG, nodesBridgeHubSVG, nodesCentrifugePNG, nodesCloverSVG, nodesCoinversationPNG, nodesCrustParachainSVG, nodesDarwiniaSVG, nodesEfinitySVG, nodesEwxSVG, nodesHashedPNG, nodesIntegriteeSVG, nodesInterlaySVG, nodesKiltPNG, nodesKylinPNG, nodesLitentryPNG, nodesMantaPNG, nodesMoonbeamSVG, nodesMoonsamaSVG, nodesNodleSVG, nodesOmnibtcSVG, nodesParallelSVG, nodesPhalaSVG, nodesPolkadexSVG, nodesSoraSubstrateSVG, nodesSubdaoPNG, nodesSubgameSVG, nodesSubsocialSVG, nodesT3rnPNG, nodesUniqueSVG, nodesZeitgeistPNG } from '../ui/logos/nodes/index.js';
 import { getTeleports } from './util.js';
 
@@ -807,5 +807,91 @@ export const prodRelayPolkadot: EndpointOption = {
     color: '#e6007a',
     identityIcon: 'polkadot',
     logo: chainsPolkadotCircleSVG
+  }
+};
+
+export const prodParasInfraBlockchainCommon: EndpointOption[] = [
+  {
+    info: 'InfraBlockchainAssetHub',
+    paraId: 1000,
+    providers: {
+      'bc-labs': 'wss://asset.stage.infrablockspace.net'
+    },
+    teleport: [-1],
+    text: 'AssetHub',
+    ui: {
+      color: '#86e62a',
+      logo: chainsInfraBlockchainPNG
+    }
+  },
+  {
+    info: 'InfraBlockchainContracts',
+    paraId: 1001,
+    providers: {
+      'bc-labs': 'wss://contract.stage.infrablockspace.net'
+    },
+    teleport: [-1],
+    text: 'Contract',
+    ui: {
+      color: '#86e62a',
+      logo: chainsInfraBlockchainPNG
+    }
+  },
+  {
+    info: 'InfraBlockchainDID',
+    paraId: 1002,
+    providers: {
+      'bc-labs': 'wss://did.stage.infrablockspace.net'
+    },
+    teleport: [-1],
+    text: 'Infra DID',
+    ui: {
+      color: '#86e62a',
+      logo: chainsInfraBlockchainPNG
+    }
+  },
+  {
+    info: 'InfraBlockchainEVM',
+    paraId: 1200,
+    providers: {
+      'bc-labs': 'wss://evm.stage.infrablockspace.net'
+    },
+    teleport: [-1],
+    text: 'Infra EVM',
+    ui: {
+      color: '#86e62a',
+      logo: chainsInfraBlockchainPNG
+    }
+  },
+  {
+    info: 'URAuth',
+    paraId: 2000,
+    providers: {
+      'bc-labs': 'wss://newnal.stage.infrablockspace.net'
+    },
+    teleport: [-1],
+    text: 'URAuth',
+    ui: {
+      color: '#86e62a',
+      logo: chainsInfraBlockchainPNG
+    }
+  }
+];
+
+export const prodRelayInfraBlockchain: EndpointOption = {
+  dnslink: 'InfraBlockchain',
+  info: 'InfraBlockchain',
+  linked: [
+    ...prodParasInfraBlockchainCommon
+  ],
+  providers: {
+    'bc-labs': 'wss://relay.stage.infrablockspace.net'
+  },
+  teleport: getTeleports(prodParasInfraBlockchainCommon),
+  text: 'InfraBlockchain',
+  ui: {
+    color: '#e6007a',
+    identityIcon: 'substrate',
+    logo: chainsInfraBlockchainPNG
   }
 };
