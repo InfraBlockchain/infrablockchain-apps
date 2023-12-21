@@ -27,7 +27,7 @@ interface Props {
 function createExternals (t: (key: string, optionsOrText?: string | { replace: Record<string, unknown> }, options?: { ns: string }) => string): ItemRoute[] {
   return [
     {
-      href: 'https://github.com/InfraBlockchain/infrablockspace-apps',
+      href: 'https://github.com/InfraBlockchain/infrablockchan-apps',
       icon: 'code-branch',
       name: 'github',
       text: t('nav.github', 'GitHub', { ns: 'apps-routing' })
