@@ -86,7 +86,7 @@ async function getInjectedAccounts (injectedPromise: Promise<InjectedExtension[]
     return accounts.map(({ address, meta }, whenCreated): InjectedAccountExt => ({
       address,
       meta: objectSpread({}, meta, {
-        name: `${meta.name || 'unknown'} (${meta.source === 'polkadot-js' ? 'extension' : meta.source})`,
+        name: `${meta.name || 'unknown'} (${meta.source === 'infra-extension' ? 'extension' : meta.source})`,
         whenCreated
       })
     }));
@@ -240,25 +240,25 @@ async function createApi (apiUrl: string, signer: ApiSigner, onError: (error: un
 
     statics.api = new ApiPromise({
       provider,
-      types: {
-        SystemTokenId: {
-            paraId: "Compact<u32>",
-            palletId: "Compact<u32>",
-            assetId: "Compact<u32>"
-        },
-      },
+      registry: statics.registry,
       signedExtensions: {
         ChargeSystemToken: {
-            extrinsic: {
-                tip: 'Compact<u128>',
-                systemTokenId: 'Option<SystemTokenId>',
-                voteCandidate: 'Option<AccountId32>',
-            },
-            payload: {}
+          extrinsic: {
+            systemTokenId: 'Option<SystemTokenId>',
+            tip: 'Compact<u128>',
+            voteCandidate: 'Option<AccountId32>'
+          },
+          payload: {}
         }
       },
-      registry: statics.registry,
       signer,
+      types: {
+        SystemTokenId: {
+          assetId: 'Compact<u32>',
+          palletId: 'Compact<u32>',
+          paraId: 'Compact<u32>'
+        }
+      },
       typesBundle
     });
 

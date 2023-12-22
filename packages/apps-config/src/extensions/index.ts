@@ -3,14 +3,14 @@
 
 import type { Browser, Extension, Known } from './types.js';
 
-import { PolkadotJs } from './polkadot-js.js';
+import { InfraBlockchainExtension } from './infra-extension.js';
 
 // The list of known extensions including the links to tem on the store. This is
 // used when no extensions are actually available, promoting the user to install
 // one or more (Any known extension can and should be added here)
 
 export const knownExtensions: Record<string, Known> = {
-  'polkadot-js': PolkadotJs
+  'infra-extension': InfraBlockchainExtension
 };
 
 export const availableExtensions = Object

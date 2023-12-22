@@ -28,7 +28,7 @@ export { chainsGenshiroSVG } from './generated/genshiroSVG.js';
 export { chainsGmJPEG } from './generated/gmJPEG.js';
 export { chainsHydratePNG } from './generated/hydratePNG.js';
 export { chainsIdiyanaleLogoWhiteSVG } from './generated/idiyanale_logo_whiteSVG.js';
-export { chainsInfraBlockchainPNG } from './generated/infrablockchainPNG.js';
+export { chainsInfraBlockchainPNG } from './generated/InfraBlockchainPNG.js';
 export { chainsInvarchJPEG } from './generated/invarchJPEG.js';
 export { chainsJurPNG } from './generated/jurPNG.js';
 export { chainsKaruraSVG } from './generated/karuraSVG.js';
