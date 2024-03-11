@@ -3,8 +3,8 @@
 
 import type { Known } from './types.js';
 
+import { chainsInfraBlockchainPNG } from '../ui/logos/chains/generated/infraBlockchainPNG.js';
 import { externalEmptySVG } from '../ui/logos/external/index.js';
-import { chainsInfraBlockchainPNG } from '../ui/logos/chains/generated/InfraBlockchainPNG.js';
 
 export const InfraBlockchainExtension: Known = {
   all: {
