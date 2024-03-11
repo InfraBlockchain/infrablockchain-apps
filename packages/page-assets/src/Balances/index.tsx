@@ -40,7 +40,7 @@ function Balances ({ className, infos = [] }: Props): React.ReactElement<Props> 
 
   const assetOptions = useMemo(
     () => completeInfos.map(({ id, metadata }, index) => ({
-      text: `${metadata.name.toUtf8()} (${formatNumber(id)})`,
+      text: `${metadata.toHuman().name} (${formatNumber(id)})`,
       value: index
     })),
     [completeInfos]
@@ -48,7 +48,7 @@ function Balances ({ className, infos = [] }: Props): React.ReactElement<Props> 
 
   const siFormat = useMemo(
     (): [number, string] => info
-      ? [info.metadata.decimals.toNumber(), info.metadata.symbol.toUtf8().toUpperCase()]
+      ? [info.metadata.decimals, info.metadata.toHuman().symbol.toUpperCase()]
       : [0, 'NONE'],
     [info]
   );

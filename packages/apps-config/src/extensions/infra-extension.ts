@@ -3,8 +3,8 @@
 
 import type { Known } from './types.js';
 
-import { extensionsInfraBlockchainPNG } from '../ui/logos/extensions/index.js';
 import { externalEmptySVG } from '../ui/logos/external/index.js';
+import { chainsInfraBlockchainPNG } from '../ui/logos/chains/generated/InfraBlockchainPNG.js';
 
 export const InfraBlockchainExtension: Known = {
   all: {
@@ -16,6 +16,6 @@ export const InfraBlockchainExtension: Known = {
   ui: {
     // Don't copy this line as-is :) The '|| empty' here is just there for a build
     // check, aka it actually has no effect (the first part is always defined)
-    logo: extensionsInfraBlockchainPNG || externalEmptySVG
+    logo: chainsInfraBlockchainPNG || externalEmptySVG
   }
 };

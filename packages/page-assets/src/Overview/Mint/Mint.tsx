@@ -31,7 +31,7 @@ function Mint ({ className, details: { issuer, minBalance }, id, metadata, onClo
   );
 
   const [siDecimals, siSymbol] = useMemo(
-    () => [metadata.decimals.toNumber(), metadata.symbol.toUtf8().toUpperCase()],
+    () => [metadata.decimals, metadata.toHuman().symbol.toUpperCase()],
     [metadata]
   );
 

@@ -15,10 +15,11 @@ interface Props {
   value: AssetInfo;
 }
 
-function Asset ({ className, value: { details, id, isIssuerMe, metadata } }: Props): React.ReactElement<Props> {
+function Asset({ className, value: { details, id, isIssuerMe, metadata } }: Props): React.ReactElement<Props> {
+
   const format = useMemo(
     (): [number, string] => metadata
-      ? [metadata.decimals.toNumber(), metadata.symbol.toUtf8()]
+      ? [metadata.decimals, metadata.toHuman().symbol]
       : [0, '---'],
     [metadata]
   );
@@ -26,7 +27,7 @@ function Asset ({ className, value: { details, id, isIssuerMe, metadata } }: Pro
   return (
     <tr className={className}>
       <Table.Column.Id value={id} />
-      <td className='together'>{metadata?.name.toUtf8()}</td>
+      <td className='together'>{metadata?.toHuman().name}</td>
       <td className='address media--1000'>{details && <AddressSmall value={details.owner} />}</td>
       <td className='address media--1300'>{details && <AddressSmall value={details.admin} />}</td>
       <td className='address media--1600'>{details && <AddressSmall value={details.issuer} />}</td>
