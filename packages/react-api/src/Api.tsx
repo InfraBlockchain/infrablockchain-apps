@@ -1,4 +1,4 @@
-// Copyright 2017-2023 @polkadot/react-api authors & contributors
+// Copyright 2017-2024 @polkadot/react-api authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { LinkOption } from '@polkadot/apps-config/endpoints/types';
@@ -7,6 +7,7 @@ import type { ChainProperties, ChainType } from '@polkadot/types/interfaces';
 import type { KeyringStore } from '@polkadot/ui-keyring/types';
 import type { ApiProps, ApiState } from './types.js';
 
+import { ChopsticksProvider, setStorage } from '@acala-network/chopsticks-core';
 import * as Sc from '@substrate/connect';
 import React, { useEffect, useMemo, useState } from 'react';
 import store from 'store';
@@ -229,14 +230,26 @@ async function getLightProvider (chain: string): Promise<ScProvider> {
 /**
  * @internal
  */
-async function createApi (apiUrl: string, signer: ApiSigner, onError: (error: unknown) => void): Promise<Record<string, Record<string, string>>> {
+async function createApi (apiUrl: string, signer: ApiSigner, isLocalFork: boolean, onError: (error: unknown) => void): Promise<Record<string, Record<string, string>>> {
   const types = getDevTypes();
   const isLight = apiUrl.startsWith('light://');
+  let provider;
 
   try {
-    const provider = isLight
-      ? await getLightProvider(apiUrl.replace('light://', ''))
-      : new WsProvider(apiUrl);
+    if (isLight) {
+      provider = await getLightProvider(apiUrl.replace('light://', ''));
+    } else if (isLocalFork) {
+      provider = await ChopsticksProvider.fromEndpoint(apiUrl);
+      await setStorage(provider.chain, {
+        System: {
+          Account: [
+            [['5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY'], { data: { free: 1000 * 1e12 }, providers: 1 }]
+          ]
+        }
+      });
+    } else {
+      provider = new WsProvider(apiUrl);
+    }
 
     statics.api = new ApiPromise({
       provider,
@@ -273,13 +286,14 @@ async function createApi (apiUrl: string, signer: ApiSigner, onError: (error: un
   return types;
 }
 
-export function ApiCtxRoot ({ apiUrl, children, isElectron, store }: Props): React.ReactElement<Props> | null {
+export function ApiCtxRoot ({ apiUrl, children, isElectron, store: keyringStore }: Props): React.ReactElement<Props> | null {
   const { queuePayload, queueSetTxStatus } = useQueue();
   const [state, setState] = useState<ApiState>(EMPTY_STATE);
   const [isApiConnected, setIsApiConnected] = useState(false);
   const [isApiInitialized, setIsApiInitialized] = useState(false);
   const [apiError, setApiError] = useState<null | string>(null);
   const [extensions, setExtensions] = useState<InjectedExtension[] | undefined>();
+  const [isLocalFork] = useState(store.get('localFork') === apiUrl);
   const apiEndpoint = useEndpoint(apiUrl);
   const relayUrls = useMemo(
     () => (apiEndpoint?.valueRelay && isNumber(apiEndpoint.paraId) && (apiEndpoint.paraId < 2000))
@@ -293,8 +307,8 @@ export function ApiCtxRoot ({ apiUrl, children, isElectron, store }: Props): Rea
     [apiUrl, isElectron]
   );
   const value = useMemo<ApiProps>(
-    () => objectSpread({}, state, { api: statics.api, apiEndpoint, apiError, apiRelay, apiUrl, createLink, extensions, isApiConnected, isApiInitialized, isElectron, isWaitingInjected: !extensions }),
-    [apiError, createLink, extensions, isApiConnected, isApiInitialized, isElectron, state, apiEndpoint, apiRelay, apiUrl]
+    () => objectSpread({}, state, { api: statics.api, apiEndpoint, apiError, apiRelay, apiUrl, createLink, extensions, isApiConnected, isApiInitialized, isElectron, isLocalFork, isWaitingInjected: !extensions }),
+    [apiError, createLink, extensions, isApiConnected, isApiInitialized, isElectron, isLocalFork, state, apiEndpoint, apiRelay, apiUrl]
   );
 
   // initial initialization
@@ -305,7 +319,7 @@ export function ApiCtxRoot ({ apiUrl, children, isElectron, store }: Props): Rea
       setApiError((error as Error).message);
     };
 
-    createApi(apiUrl, new ApiSigner(statics.registry, queuePayload, queueSetTxStatus), onError)
+    createApi(apiUrl, new ApiSigner(statics.registry, queuePayload, queueSetTxStatus), isLocalFork, onError)
       .then((types): void => {
         statics.api.on('connected', () => setIsApiConnected(true));
         statics.api.on('disconnected', () => setIsApiConnected(false));
@@ -319,15 +333,22 @@ export function ApiCtxRoot ({ apiUrl, children, isElectron, store }: Props): Rea
 
           const urlIsEthereum = !!location.href.includes('keyring-type=ethereum');
 
-          loadOnReady(statics.api, apiEndpoint, injectedPromise, store, types, urlIsEthereum)
+          loadOnReady(statics.api, apiEndpoint, injectedPromise, keyringStore, types, urlIsEthereum)
             .then(setState)
             .catch(onError);
         });
 
+        if (isLocalFork) {
+          // clear localFork from local storage onMount after api setup
+          store.set('localFork', '');
+          statics.api.connect()
+            .catch(onError);
+        }
+
         setIsApiInitialized(true);
       })
       .catch(onError);
-  }, [apiEndpoint, apiUrl, queuePayload, queueSetTxStatus, store]);
+  }, [apiEndpoint, apiUrl, queuePayload, queueSetTxStatus, keyringStore, isLocalFork]);
 
   if (!value.isApiInitialized) {
     return null;
