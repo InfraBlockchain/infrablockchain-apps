@@ -247,8 +247,6 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
     );
   }, [api, currentItem, senderInfo]);
 
-  console.log('assetPayment', JSON.stringify(assetPayment, null, 2));
-
   const _addQrSignature = useCallback(
     ({ signature }: { signature: string }) => qrResolve && qrResolve({
       id: ++qrId,

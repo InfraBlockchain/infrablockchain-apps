@@ -36,8 +36,6 @@ function AssetPayment ({ className, onChange }: Props): React.ReactElement<Props
       });
   }, [onChange, showAssetPayment, assetId]);
 
-  console.log(assetId);
-
   return (
     <Modal.Columns
       className={className}

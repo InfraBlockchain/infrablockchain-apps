@@ -141,8 +141,6 @@ function Developer ({ className = '', onStatusChange }: Props): React.ReactEleme
 
         if (Object.keys(types).length) {
           url = encodeUrlTypes(types);
-
-          console.log(url);
         }
       } catch (error) {
         console.error(error);
