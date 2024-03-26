@@ -47,12 +47,14 @@ function useApiUrlImpl (url?: null | string | string[]): ApiPromise | null {
           provider: (providerRef.current = new WsProvider(urls)),
           types: {
           },
+          // eslint-disable-next-line sort-keys
           signedExtensions: {
             ChargeSystemToken: {
               extrinsic: {
                 tip: 'Compact<u128>',
-                systemTokenId: 'Option<MultiLocation>',
-                voteCandidate: 'Option<AccountId32>'
+                // eslint-disable-next-line sort-keys
+                assetId: 'Option<MultiLocation>',
+                candidate: 'Option<AccountId32>'
               },
               payload: {}
             }
