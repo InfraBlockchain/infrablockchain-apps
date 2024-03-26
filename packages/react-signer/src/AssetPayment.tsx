@@ -1,16 +1,18 @@
+/* eslint-disable sort-keys */
+/* eslint-disable header/header */
 // Copyright 2017-2023 @polkadot/react-signer authors & contributors
 // SPDX-License-Identifier: Apache-2.0
+
 import React, { useEffect, useState } from 'react';
 
-import { InputNumber, Modal, Toggle } from '@polkadot/react-components';
-import { BN, BN_ZERO } from '@polkadot/util';
+import { Modal, Toggle } from '@polkadot/react-components';
+import { useApi } from '@polkadot/react-hooks';
+import Params from '@polkadot/react-params';
 
 import { useTranslation } from './translate.js';
 
 export interface AssetPaymentInterface {
-  paraId: BN | undefined, 
-  palletId: BN | undefined, 
-  assetId: BN | undefined,
+  assetId: unknown,
 }
 
 interface Props {
@@ -20,24 +22,21 @@ interface Props {
 
 function AssetPayment ({ className, onChange }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
-  const [assetId, setAssetId] = useState<BN | undefined>();
-  const [paraId, setParaId] = useState<BN | undefined>();
-  const [palletId, setPalletId] = useState<BN | undefined>();
+  const { api } = useApi();
+  const [assetId, setAssetId] = useState<unknown>();
   const [showAssetPayment, setShowAssetPayment] = useState(false);
 
   useEffect((): void => {
     onChange(showAssetPayment
       ? {
-        paraId: paraId === BN_ZERO ? undefined : paraId,
-        palletId: palletId  === BN_ZERO ? undefined : palletId,
-        assetId: assetId  === BN_ZERO ? undefined : assetId,
+        assetId
       }
       : {
-        paraId: undefined,
-        palletId: undefined,
-        assetId: undefined,
+        assetId: undefined
       });
-  }, [onChange, showAssetPayment, paraId, palletId, assetId]);
+  }, [onChange, showAssetPayment, assetId]);
+
+  console.log(assetId);
 
   return (
     <Modal.Columns
@@ -55,24 +54,13 @@ function AssetPayment ({ className, onChange }: Props): React.ReactElement<Props
         value={showAssetPayment}
       />
       {showAssetPayment && (
-        <InputNumber
-          isZeroable={false}
-          label={t<string>('parachain ID (optional)')}
-          onChange={setParaId}
-        />
-      )}
-      {showAssetPayment && (
-        <InputNumber
-          isZeroable={false}
-          label={t<string>('Pallet Index (optional)')}
-          onChange={setPalletId}
-        />
-      )}
-      {showAssetPayment && (
-        <InputNumber
-          isZeroable={false}
-          label={t<string>('Asset ID (optional)')}
+        <Params
+          isDisabled={false}
           onChange={setAssetId}
+          params={
+            [{ name: 'id', type: { info: 10, type: 'StagingXcmV3MultiLocation', typeName: 'assetId' } }]
+          }
+          registry={api.registry}
         />
       )}
     </Modal.Columns>

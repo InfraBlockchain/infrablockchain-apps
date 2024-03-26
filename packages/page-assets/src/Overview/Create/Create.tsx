@@ -34,7 +34,7 @@ function Create ({ assetIds, className, onClose, openId }: Props): React.ReactEl
     () => asset
       ? [
         api.tx.assets.create(asset.assetId, asset.accountId, asset.minBalance),
-        api.tx.assets.setMetadata(asset.assetId, null, asset.assetName, asset.assetSymbol, asset.assetDecimals)
+        api.tx.assets.setMetadata(asset.assetId, asset.assetName, asset.assetSymbol, asset.assetDecimals)
       ]
       : [null, null],
     [api, asset]

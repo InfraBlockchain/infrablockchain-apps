@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ApiPromise } from '@polkadot/api';
-import type { SignerOptions } from '@polkadot/api/submittable/types';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { Ledger } from '@polkadot/hw-ledger';
 import type { KeyringPair } from '@polkadot/keyring/types';
@@ -19,11 +18,12 @@ import { web3FromSource } from '@polkadot/extension-dapp';
 import { Button, ErrorBoundary, Modal, Output, styled, Toggle } from '@polkadot/react-components';
 import { useApi, useLedger, useQueue, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
-import { assert, nextTick, BN_ZERO } from '@polkadot/util';
+import { assert, nextTick } from '@polkadot/util';
 import { addressEq } from '@polkadot/util-crypto';
 
 import { AccountSigner, LedgerSigner, QrSigner } from './signers/index.js';
 import Address from './Address.js';
+import AssetPayment, { type AssetPaymentInterface } from './AssetPayment.js';
 import FeePayer from './FeePayer.js';
 import Qr from './Qr.js';
 import SignFields from './SignFields.js';
@@ -32,7 +32,6 @@ import Transaction from './Transaction.js';
 import { useTranslation } from './translate.js';
 import { cacheUnlock, extractExternal, handleTxResults } from './util.js';
 import Vote, { type PotVote } from './Vote.js';
-import AssetPayment, { type AssetPaymentInterface } from './AssetPayment.js';
 
 interface Props {
   className?: string;
@@ -303,24 +302,21 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
   const _onSend = useCallback(
     async (queueSetTxStatus: QueueTxMessageSetStatus, currentItem: QueueTx, senderInfo: AddressProxy): Promise<void> => {
       if (senderInfo.signAddress) {
-        console.log(assetPayment);
         const [tx, [status, pairOrAddress, options]] = await Promise.all([
           wrapTx(api, currentItem, senderInfo),
           extractParams(api, senderInfo.signAddress, {
-            nonce: -1, tip, voteCandidate: vote?.voteCandidate, systemTokenId: assetPayment?.assetId === BN_ZERO || assetPayment?.assetId === undefined ? undefined :
-            {
-              paraId: assetPayment?.paraId,
-              palletId: assetPayment?.palletId,
-              assetId: assetPayment?.assetId
-            } 
-        }, getLedger, setQrState)
+            nonce: -1,
+            tip,
+            voteCandidate: vote?.voteCandidate,
+            systemTokenId: assetPayment?.assetId.value
+          }, getLedger, setQrState)
         ]);
 
         queueSetTxStatus(currentItem.id, status);
         await signAndSend(queueSetTxStatus, currentItem, tx, pairOrAddress, options);
       }
     },
-    [api, getLedger, tip, vote, feePayer, assetPayment]
+    [api, getLedger, tip, vote, assetPayment]
   );
 
   const _onSign = useCallback(
@@ -329,19 +325,17 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
         console.log(assetPayment);
         const [tx, [, pairOrAddress, options]] = await Promise.all([
           wrapTx(api, currentItem, senderInfo),
-          extractParams(api, senderInfo.signAddress, { ...signedOptions, nonce: -1, tip, voteCandidate: vote?.voteCandidate, systemTokenId: assetPayment?.assetId === BN_ZERO || assetPayment?.assetId === undefined ? undefined :
-            {
-              paraId: assetPayment?.paraId,
-              palletId: assetPayment?.palletId,
-              assetId: assetPayment?.assetId
-            } 
-      }, getLedger, setQrState)
+          extractParams(api, senderInfo.signAddress, { ...signedOptions,
+            nonce: -1,
+            tip,
+            voteCandidate: vote?.voteCandidate,
+            systemTokenId: assetPayment?.assetId.value }, getLedger, setQrState)
         ]);
 
         setSignedTx(await signAsync(queueSetTxStatus, currentItem, tx, pairOrAddress, options));
       }
     },
-    [api, feePayer, getLedger, signedOptions, tip, assetPayment, vote]
+    [api, getLedger, signedOptions, tip, assetPayment, vote]
   );
 
   const _doStart = useCallback(

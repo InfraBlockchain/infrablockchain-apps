@@ -257,7 +257,7 @@ async function createApi (apiUrl: string, signer: ApiSigner, isLocalFork: boolea
       signedExtensions: {
         ChargeSystemToken: {
           extrinsic: {
-            systemTokenId: 'Option<SystemTokenId>',
+            systemTokenId: 'Option<MultiLocation>',
             tip: 'Compact<u128>',
             voteCandidate: 'Option<AccountId32>'
           },
@@ -266,11 +266,6 @@ async function createApi (apiUrl: string, signer: ApiSigner, isLocalFork: boolea
       },
       signer,
       types: {
-        SystemTokenId: {
-          assetId: 'Compact<u32>',
-          palletId: 'Compact<u32>',
-          paraId: 'Compact<u32>'
-        }
       },
       typesBundle
     });

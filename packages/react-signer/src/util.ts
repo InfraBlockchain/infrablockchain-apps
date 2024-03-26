@@ -19,17 +19,17 @@ const LOCK_DELAY = UNLOCK_MINS * 60 * 1000;
 
 const lockCountdown: Record<string, number> = {};
 
-export function cacheUnlock(pair: KeyringPair): void {
+export function cacheUnlock (pair: KeyringPair): void {
   lockCountdown[pair.address] = Date.now() + LOCK_DELAY;
 }
 
-export function lockAccount(pair: KeyringPair): void {
+export function lockAccount (pair: KeyringPair): void {
   if ((Date.now() > (lockCountdown[pair.address] || 0)) && !pair.isLocked) {
     pair.lock();
   }
 }
 
-export function extractExternal(accountId: string | null): AddressFlags {
+export function extractExternal (accountId: string | null): AddressFlags {
   if (!accountId) {
     return NO_FLAGS;
   }
@@ -71,17 +71,18 @@ export function extractExternal(accountId: string | null): AddressFlags {
   };
 }
 
-export function recodeAddress(address: string | Uint8Array): string {
+export function recodeAddress (address: string | Uint8Array): string {
   return keyring.encodeAddress(keyring.decodeAddress(address));
 }
 
-export function handleTxResults(handler: 'send' | 'signAndSend', queueSetTxStatus: QueueTxMessageSetStatus, { id, txFailedCb = NOOP, txSuccessCb = NOOP, txUpdateCb = NOOP }: QueueTx, unsubscribe: () => void): (result: SubmittableResult) => void {
+export function handleTxResults (handler: 'send' | 'signAndSend', queueSetTxStatus: QueueTxMessageSetStatus, { id, txFailedCb = NOOP, txSuccessCb = NOOP, txUpdateCb = NOOP }: QueueTx, unsubscribe: () => void): (result: SubmittableResult) => void {
   return (result: SubmittableResult): void => {
     if (!result?.status) {
       return;
     }
 
     const status = result.status.type.toLowerCase() as QueueTxStatus;
+
     console.log(`${handler}: status :: ${stringify(result)}`);
 
     queueSetTxStatus(id, status, result);
