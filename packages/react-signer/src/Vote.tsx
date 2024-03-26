@@ -8,7 +8,7 @@ import { BN } from '@polkadot/util';
 import { useTranslation } from './translate.js';
 
 export interface PotVote {
-  voteCandidate: string | null
+  candidate: string | null
 }
 
 interface Props {
@@ -18,23 +18,23 @@ interface Props {
 
 function Vote ({ className, onChange }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
-  const [voteCandidate, setVoteCandidate] = useState<string | null>();
+  const [candidate, setCandidate] = useState<string | null>();
   const [showVote, setShowVote] = useState(false);
 
   useEffect((): void => {
     onChange(showVote
       ? {
-        voteCandidate: voteCandidate!
+        candidate: candidate!
       }
       : {
-        voteCandidate: null
+        candidate: null
       });
-  }, [onChange, showVote, voteCandidate]);
+  }, [onChange, showVote, candidate]);
 
   return (
     <Modal.Columns
       className={className}
-      hint={t<string>('Adding Proof of Transaction voteCandidate')}
+      hint={t<string>('Adding Proof of Transaction candidate')}
     >
       <Toggle
         className='voteToggle'
@@ -49,7 +49,7 @@ function Vote ({ className, onChange }: Props): React.ReactElement<Props> | null
       {showVote && (
         <InputAddress
           label={t<string>('Vote Candidate (optional)')}
-          onChange={setVoteCandidate}
+          onChange={setCandidate}
           type='allPlus'
         />
       )}

@@ -247,6 +247,8 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
     );
   }, [api, currentItem, senderInfo]);
 
+  console.log('assetPayment', JSON.stringify(assetPayment, null, 2));
+
   const _addQrSignature = useCallback(
     ({ signature }: { signature: string }) => qrResolve && qrResolve({
       id: ++qrId,
@@ -307,8 +309,8 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
           extractParams(api, senderInfo.signAddress, {
             nonce: -1,
             tip,
-            voteCandidate: vote?.voteCandidate,
-            systemTokenId: assetPayment?.assetId === undefined ? undefined : assetPayment?.assetId.value
+            candidate: vote?.candidate,
+            assetId: assetPayment?.assetId === undefined ? undefined : assetPayment?.assetId[0].value
           }, getLedger, setQrState)
         ]);
 
@@ -322,14 +324,13 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
   const _onSign = useCallback(
     async (queueSetTxStatus: QueueTxMessageSetStatus, currentItem: QueueTx, senderInfo: AddressProxy): Promise<void> => {
       if (senderInfo.signAddress) {
-        console.log(assetPayment);
         const [tx, [, pairOrAddress, options]] = await Promise.all([
           wrapTx(api, currentItem, senderInfo),
           extractParams(api, senderInfo.signAddress, { ...signedOptions,
             nonce: -1,
             tip,
-            voteCandidate: vote?.voteCandidate,
-            systemTokenId: assetPayment?.assetId === undefined ? undefined : assetPayment?.assetId.value
+            candidate: vote?.candidate,
+            assetId: assetPayment[0]?.assetId === undefined ? undefined : assetPayment?.assetId[0].value
           }, getLedger, setQrState)
         ]);
 
