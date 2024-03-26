@@ -308,7 +308,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
             nonce: -1,
             tip,
             voteCandidate: vote?.voteCandidate,
-            systemTokenId: assetPayment?.assetId.value
+            systemTokenId: assetPayment?.assetId === undefined ? undefined : assetPayment?.assetId.value
           }, getLedger, setQrState)
         ]);
 
@@ -329,7 +329,8 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
             nonce: -1,
             tip,
             voteCandidate: vote?.voteCandidate,
-            systemTokenId: assetPayment?.assetId.value }, getLedger, setQrState)
+            systemTokenId: assetPayment?.assetId === undefined ? undefined : assetPayment?.assetId.value
+          }, getLedger, setQrState)
         ]);
 
         setSignedTx(await signAsync(queueSetTxStatus, currentItem, tx, pairOrAddress, options));
