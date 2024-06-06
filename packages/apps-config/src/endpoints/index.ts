@@ -12,7 +12,7 @@ export { CUSTOM_ENDPOINT_KEY } from './development.js';
 export * from './production.js';
 export * from './testing.js';
 
-function defaultT(keyOrText: string, text?: string | TOptions, options?: TOptions): string {
+function defaultT (keyOrText: string, text?: string | TOptions, options?: TOptions): string {
   return (
     (options?.replace?.host as string) ||
     text?.toString() ||
@@ -20,7 +20,7 @@ function defaultT(keyOrText: string, text?: string | TOptions, options?: TOption
   );
 }
 
-export function createWsEndpoints(t: TFunction = defaultT, firstOnly = false, withSort = true): LinkOption[] {
+export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, withSort = true): LinkOption[] {
   return [
     ...createCustom(t),
     {

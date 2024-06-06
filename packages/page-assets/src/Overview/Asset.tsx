@@ -15,8 +15,7 @@ interface Props {
   value: AssetInfo;
 }
 
-function Asset({ className, value: { details, id, isIssuerMe, metadata } }: Props): React.ReactElement<Props> {
-
+function Asset ({ className, value: { details, id, isIssuerMe, metadata } }: Props): React.ReactElement<Props> {
   const format = useMemo(
     (): [number, string] => metadata
       ? [metadata.decimals, metadata.toHuman().symbol]

@@ -12,13 +12,13 @@ import { arrayShuffle, isString } from '@polkadot/util';
 import { createNamedHook } from './createNamedHook.js';
 import { useIsMountedRef } from './useIsMountedRef.js';
 
-function disconnect(provider: ProviderInterface | null): null {
+function disconnect (provider: ProviderInterface | null): null {
   provider?.disconnect().catch(console.error);
 
   return null;
 }
 
-function useApiUrlImpl(url?: null | string | string[]): ApiPromise | null {
+function useApiUrlImpl (url?: null | string | string[]): ApiPromise | null {
   const providerRef = useRef<ProviderInterface | null>(null);
   const mountedRef = useIsMountedRef();
   const [state, setState] = useState<ApiPromise | null>(null);
@@ -46,18 +46,15 @@ function useApiUrlImpl(url?: null | string | string[]): ApiPromise | null {
         .create({
           provider: (providerRef.current = new WsProvider(urls)),
           types: {
-            SystemTokenId: {
-              paraId: "Compact<u32>",
-              palletId: "Compact<u32>",
-              assetId: "Compact<u32>"
-            },
           },
+          // eslint-disable-next-line sort-keys
           signedExtensions: {
             ChargeSystemToken: {
               extrinsic: {
                 tip: 'Compact<u128>',
-                systemTokenId: 'Option<SystemTokenId>',
-                voteCandidate: 'Option<AccountId32>',
+                // eslint-disable-next-line sort-keys
+                assetId: 'Option<MultiLocation>',
+                candidate: 'Option<AccountId32>'
               },
               payload: {}
             }

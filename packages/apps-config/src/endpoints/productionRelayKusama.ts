@@ -434,7 +434,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     paraId: 2281,
     providers: {
       Kippu: 'wss://kreivo.kippu.rocks/'
-      // Virto: 'wss://kreivo.io/' // https://github.com/polkadot-js/apps/issues/10091
+      // Virto: 'wss://kreivo.io/' // https://github.com/polkadot-js/apps/issues/10373
     },
     text: 'Kreivo - By Virto',
     ui: {
@@ -851,7 +851,6 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'turing',
     paraId: 2114,
     providers: {
-      Dwellir: 'wss://turing-rpc.dwellir.com',
       OAK: 'wss://rpc.turing.oak.tech'
     },
     text: 'Turing Network',
@@ -878,7 +877,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     info: 'xode',
     paraId: 3344,
     providers: {
-      XodeCommunity: 'wss://bootnodea01.xode.net/n7yoxCmcIrCF6VziCcDmYTwL8R03a/rpc'
+      XodeCommunity: 'wss://rpcnodea01.xode.net/n7yoxCmcIrCF6VziCcDmYTwL8R03a/rpc'
     },
     text: 'Xode',
     ui: {
